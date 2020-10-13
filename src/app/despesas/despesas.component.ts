@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { stringify } from 'querystring';
 import { DespesasSenadoresService } from '../despesas-senadores.service';
 import { Senadores } from '../senadores/senadores';
+import { Despesas } from './despesas';
 
 @Component({
   selector: 'app-despesas',
@@ -30,6 +31,7 @@ export class DespesasComponent implements OnInit {
         .subscribe((despesasSenadores) => {
           this.despesasSenadores = despesasSenadores;
           this.expenses = this.expensesSummary();
+          this.transformDespesasSenadores();
         });
     });
   }
@@ -41,28 +43,29 @@ export class DespesasComponent implements OnInit {
     ser calculadas com base no array despesas
   */
   expensesSummary() {
-    let expenses = []
+    let expenses = [];
     this.despesasSenadores.despesas.forEach((expense) => {
+      let { tipo, valor } = expense;
       let hasExpense = expenses.find((hasExpense) => {
-        return hasExpense.id === expense.tipo;
+        return hasExpense.id === tipo;
       });
       if (hasExpense) {
-        hasExpense.total = hasExpense.total + expense.valor;
+        hasExpense.total = hasExpense.total + valor;
       } else {
         let spending = {};
-        switch (expense.tipo) {
+        switch (tipo) {
           case 1:
             spending = {
               id: 1,
               descricao: 'Aluguel de imóveis e despesas concernentes a eles',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 2:
             spending = {
               id: 2,
               descricao: 'Divulgação da atividade parlamentar',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 3:
@@ -70,14 +73,14 @@ export class DespesasComponent implements OnInit {
               id: 3,
               descricao:
                 'Aquisição de material de consumo para uso no escritório',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 4:
             spending = {
               id: 4,
               descricao: 'Passagens aéreas, aquáticas e terrestres nacionais.',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 5:
@@ -85,21 +88,21 @@ export class DespesasComponent implements OnInit {
               id: 5,
               descricao:
                 'Contratação de consultorias, assessorias, pesquisas, trabalhos técnicos e outros serviços.',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 6:
             spending = {
               id: 6,
               descricao: 'Locomoção, hospedagem, alimentação e combustíveis.',
-              total: expense.valor,
+              total: valor,
             };
             break;
           case 7:
             spending = {
               id: 7,
               descricao: 'Serviços de Segurança Privada',
-              total: expense.valor,
+              total: valor,
             };
             break;
           default:
@@ -109,5 +112,21 @@ export class DespesasComponent implements OnInit {
       }
     });
     return expenses;
+  }
+
+  transformDespesasSenadores() {
+    let { id, nomeSenador } = this.despesasSenadores;
+    let despesas = [];
+    this.despesasSenadores.despesas.forEach((expense) => {
+      let { tipo, fornec, ano, mes, dia, valor } = expense;
+      let newExpense = {
+        tipo,
+        fornec,
+        dataDespesa: new Date(ano, mes, dia),
+        valor,
+      };
+      despesas.push(newExpense);
+    });
+    this.despesasSenadores = {id, nomeSenador, despesas};
   }
 }

@@ -15,10 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DespesasComponent } from './despesas/despesas.component';
 import { SenadoresComponent } from './senadores/senadores.component';
+import { TipoDespesasPipe } from './tipo-despesas.pipe';
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent, SenadoresComponent, DespesasComponent],
+  declarations: [AppComponent, SenadoresComponent, DespesasComponent, TipoDespesasPipe],
   imports: [
     BrowserModule,
     HttpClientModule,

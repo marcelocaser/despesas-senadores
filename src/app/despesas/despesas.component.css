@@ -1,3 +1,7 @@
 table {
     width: 100%;
 }
+
+.mat-column-valor, .mat-column-total {
+    text-align: right;
+}
