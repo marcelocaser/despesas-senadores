@@ -11,7 +11,7 @@
 
 <table mat-table [dataSource]="expenses" class="mat-elevation-z8">
   <ng-container matColumnDef="descricao">
-    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">{{ despesa.descricao }}</td>
+    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">{{ despesa.id | tipoDespesas }}</td>
   </ng-container>
   <ng-container matColumnDef="total">
     <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">

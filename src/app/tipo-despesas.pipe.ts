@@ -20,6 +20,8 @@ export class TipoDespesasPipe implements PipeTransform {
         return 'Locomoção, hospedagem, alimentação e combustíveis.';
       case 7:
         return 'Serviços de Segurança Privada';
+      case 99:
+        return 'TOTAL';
       default:
         return null;
     }

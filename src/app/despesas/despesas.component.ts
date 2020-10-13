@@ -55,51 +55,42 @@ export class DespesasComponent implements OnInit {
           case 1:
             spending = {
               id: 1,
-              descricao: 'Aluguel de imóveis e despesas concernentes a eles',
               total: valor,
             };
             break;
           case 2:
             spending = {
               id: 2,
-              descricao: 'Divulgação da atividade parlamentar',
               total: valor,
             };
             break;
           case 3:
             spending = {
               id: 3,
-              descricao:
-                'Aquisição de material de consumo para uso no escritório',
               total: valor,
             };
             break;
           case 4:
             spending = {
               id: 4,
-              descricao: 'Passagens aéreas, aquáticas e terrestres nacionais.',
               total: valor,
             };
             break;
           case 5:
             spending = {
               id: 5,
-              descricao:
-                'Contratação de consultorias, assessorias, pesquisas, trabalhos técnicos e outros serviços.',
               total: valor,
             };
             break;
           case 6:
             spending = {
               id: 6,
-              descricao: 'Locomoção, hospedagem, alimentação e combustíveis.',
               total: valor,
             };
             break;
           case 7:
             spending = {
               id: 7,
-              descricao: 'Serviços de Segurança Privada',
               total: valor,
             };
             break;
@@ -112,7 +103,7 @@ export class DespesasComponent implements OnInit {
     let withGrandTotal = expenses.reduce((total, cur) => {
       return (total += cur.total);
     }, 0);
-    withGrandTotal = [...expenses, {id: 99, descricao: 'TOTAL', total: withGrandTotal}];
+    withGrandTotal = [...expenses, {id: 99, /*descricao: 'TOTAL',*/ total: withGrandTotal}];
     return withGrandTotal;
   }
 
