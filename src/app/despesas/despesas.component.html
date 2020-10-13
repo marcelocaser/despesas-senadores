@@ -11,10 +11,10 @@
 
 <table mat-table [dataSource]="expenses" class="mat-elevation-z8">
   <ng-container matColumnDef="descricao">
-    <td mat-cell *matCellDef="let despesa">{{ despesa.descricao }}</td>
+    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">{{ despesa.descricao }}</td>
   </ng-container>
   <ng-container matColumnDef="total">
-    <td mat-cell *matCellDef="let despesa">
+    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">
       R$ {{ despesa.total | number: "1.2-2" }}
     </td>
   </ng-container>

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Senadores } from './senadores/senadores';
 
 const urlBase = 'http://localhost:3000';
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { stringify } from 'querystring';
 import { DespesasSenadoresService } from '../despesas-senadores.service';
 import { Senadores } from '../senadores/senadores';
-import { Despesas } from './despesas';
 
 @Component({
   selector: 'app-despesas',
@@ -111,7 +109,11 @@ export class DespesasComponent implements OnInit {
         expenses.push(spending);
       }
     });
-    return expenses;
+    let withGrandTotal = expenses.reduce((total, cur) => {
+      return (total += cur.total);
+    }, 0);
+    withGrandTotal = [...expenses, {id: 99, descricao: 'TOTAL', total: withGrandTotal}];
+    return withGrandTotal;
   }
 
   transformDespesasSenadores() {
@@ -127,6 +129,6 @@ export class DespesasComponent implements OnInit {
       };
       despesas.push(newExpense);
     });
-    this.despesasSenadores = {id, nomeSenador, despesas};
+    this.despesasSenadores = { id, nomeSenador, despesas };
   }
 }
