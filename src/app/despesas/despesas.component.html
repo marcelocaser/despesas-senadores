@@ -5,16 +5,28 @@
     >
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-toolbar-row style="border-bottom: 1px solid;">
+<app-progress-bar></app-progress-bar>
+
+<mat-toolbar-row style="border-bottom: 1px solid">
   <span>Resumo de despesas</span>
 </mat-toolbar-row>
 
 <table mat-table [dataSource]="expenses" class="mat-elevation-z8">
   <ng-container matColumnDef="descricao">
-    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">{{ despesa.id | tipoDespesas }}</td>
+    <td
+      [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''"
+      mat-cell
+      *matCellDef="let despesa"
+    >
+      {{ despesa.id | tipoDespesas }}
+    </td>
   </ng-container>
   <ng-container matColumnDef="total">
-    <td [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''" mat-cell *matCellDef="let despesa">
+    <td
+      [style]="despesa.id === 99 ? 'font-weight: bolder;' : ''"
+      mat-cell
+      *matCellDef="let despesa"
+    >
       R$ {{ despesa.total | number: "1.2-2" }}
     </td>
   </ng-container>
@@ -22,7 +34,7 @@
   <tr mat-row *matRowDef="let row; columns: ['descricao', 'total']"></tr>
 </table>
 
-<mat-toolbar-row style="border-bottom: 1px solid;">
+<mat-toolbar-row style="border-bottom: 1px solid">
   <span>Discriminação das despesas</span>
 </mat-toolbar-row>
 
@@ -33,7 +45,9 @@
 >
   <ng-container matColumnDef="tipo">
     <th mat-header-cell *matHeaderCellDef>Tipo de despesa</th>
-    <td mat-cell *matCellDef="let despesa">{{ despesa.tipo | tipoDespesas }}</td>
+    <td mat-cell *matCellDef="let despesa">
+      {{ despesa.tipo | tipoDespesas }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="fornecedor">
@@ -44,18 +58,21 @@
   <ng-container matColumnDef="data">
     <th mat-header-cell *matHeaderCellDef>Data</th>
     <td mat-cell *matCellDef="let despesa">
-      {{ despesa.dataDespesa | date:"dd/MM/yyyy" }}
-    </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="valor">
-    <th mat-header-cell *matHeaderCellDef>Valor</th>
-    <td mat-cell *matCellDef="let despesa">
-     R$ {{ despesa.valor  | number: "1.2-2" }}
+      {{ despesa.dataDespesa | date: "dd/MM/yyyy" }}
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['tipo', 'fornecedor', 'data', 'valor']"></tr>
+  <ng-container matColumnDef="valor">
+    <th mat-header-cell *matHeaderCellDef>Valor</th>
+    <td mat-cell *matCellDef="let despesa">
+      R$ {{ despesa.valor | number: "1.2-2" }}
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="['tipo', 'fornecedor', 'data', 'valor']"
+  ></tr>
   <tr
     mat-row
     *matRowDef="let row; columns: ['tipo', 'fornecedor', 'data', 'valor']"
