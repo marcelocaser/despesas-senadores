@@ -1,25 +1,20 @@
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-import { ProgressBarService } from './progress-bar/progress-bar.service';
+
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private dialog: MatDialog, private progress: ProgressBarService) { }
+  constructor(private dialog: MatDialog) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.progress.pendingRequests++;
     return next.handle(req)
       .pipe(
         catchError(this.handleError.bind(this)),
-        finalize(() => {
-          this.progress.pendingRequests--;
-        })
       );
   }
 

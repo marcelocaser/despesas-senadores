@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { ErrorDialogComponent } from './common/error-dialog/error-dialog.component';
 import { ErrorInterceptor } from './common/error.interceptor';
 import { ProgressBarComponent } from './common/progress-bar/progress-bar.component';
+import { ProgressInterceptor } from './common/progress.interceptor';
 import { DespesasComponent } from './despesas/despesas.component';
 import { SenadoresComponent } from './senadores/senadores.component';
 import { TipoDespesasPipe } from './tipo-despesas.pipe';
@@ -50,6 +51,7 @@ registerLocaleData(localePt);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
